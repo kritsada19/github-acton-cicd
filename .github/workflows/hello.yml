@@ -1,0 +1,23 @@
+name: Hello World
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # รันมือได้จาก GitHub UI
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 👋 Say Hello
+        run: echo "Hello, GitHub Actions!"
+
+      - name: 📅 Show current date
+        run: date
+
+      - name: 🐧 Show OS info
+        run: uname -a
+
+      - name: 🌿 Show branch name
+        run: echo "Branch: ${{ github.ref_name }}"
