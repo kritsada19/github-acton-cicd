@@ -21,3 +21,11 @@ jobs:
 
       - name: 🌿 Show branch name
         run: echo "Branch: ${{ github.ref_name }}"
+
+      - name: 🚀 This is main branch!
+        if: github.ref_name == 'main'
+        run: echo "We are on main branch!"
+
+      - name: 🌿 This is a feature branch
+        if: github.ref_name != 'main'
+        run: echo "Feature branch: ${{ github.ref_name }}"
