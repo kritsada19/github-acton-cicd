@@ -20,8 +20,8 @@ jobs:
       - name: Show OS info
         run: uname -a
 
-      - name: Show branch name
-        run: echo "Branch: ${{ github.ref_name }}"
+      # - name: Show branch name
+      #   run: echo "Branch: ${{ github.ref_name }}"
 
       - name: This is main branch
         if: github.ref_name == 'main'
