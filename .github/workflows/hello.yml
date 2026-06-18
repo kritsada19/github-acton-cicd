@@ -2,30 +2,31 @@ name: Hello World
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:  # รันมือได้จาก GitHub UI
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   greet:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 👋 Say Hello
+      - name: Say Hello
         run: echo "Hello, GitHub Actions!"
 
-      - name: 📅 Show current date
+      - name: Show current date
         run: date
 
-      - name: 🐧 Show OS info
+      - name: Show OS info
         run: uname -a
 
-      - name: 🌿 Show branch name
+      - name: Show branch name
         run: echo "Branch: ${{ github.ref_name }}"
 
-      - name: 🚀 This is main branch!
+      - name: This is main branch
         if: github.ref_name == 'main'
         run: echo "We are on main branch!"
 
-      - name: 🌿 This is a feature branch
+      - name: This is a feature branch
         if: github.ref_name != 'main'
         run: echo "Feature branch: ${{ github.ref_name }}"
