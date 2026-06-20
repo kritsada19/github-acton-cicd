@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "test": "vitest"
+    "test": "vitest",
+    "build": "node -e \"const fs=require('fs'),path=require('path');const src=process.cwd();const out=path.join(src,'dist');if(!fs.existsSync(out))fs.mkdirSync(out);fs.readdirSync(src).filter(f=>f.endsWith('.js')).forEach(f=>fs.copyFileSync(path.join(src,f),path.join(out,f)));console.log('built to',out)\""
   },
   "repository": {
     "type": "git",
