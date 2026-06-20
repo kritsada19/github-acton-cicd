@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # ── Job 1: CI ────────────────────────────────
+  ci:
+    name: Test & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", cache: "npm" }
+      - run: npm ci && npm test && npm run build
+
+  # ── Job 2: Deploy to Staging ─────────────────
+  deploy-staging:
+    name: Deploy → Staging
+    needs: [ci] # รอ ci ผ่านก่อน
+    runs-on: ubuntu-latest
+    environment: staging # GitHub Environment
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to staging
+        run: echo "Deploying to staging..."
+        # ใส่คำสั่ง deploy จริงตรงนี้
+
+  # ── Job 3: Deploy to Production (with approval)
+  deploy-production:
+    name: Deploy → Production
+    needs: [deploy-staging]
+    runs-on: ubuntu-latest
+    environment: production # ตั้ง reviewer ที่นี่!
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to production
+        run: echo "Deploying to production!"
